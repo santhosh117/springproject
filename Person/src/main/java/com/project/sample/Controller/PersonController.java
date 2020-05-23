@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 public class PersonController {
 
-    @Autowired
     PersonService personService;
 
     @GetMapping("/persons")
