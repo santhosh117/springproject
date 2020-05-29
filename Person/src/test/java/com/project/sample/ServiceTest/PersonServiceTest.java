@@ -60,7 +60,6 @@ public class PersonServiceTest {
 
     @Test
     public void testDelete(){
-        Person p = new Person();
         personRepository.deleteById(1);
         verify(personRepository, times(1)).deleteById(1);
     }
