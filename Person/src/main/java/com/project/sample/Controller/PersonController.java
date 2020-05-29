@@ -14,6 +14,16 @@ public class PersonController {
 
     Iperson iPerson;
 
+    @PostMapping("/person")
+    private int savePerson(@RequestBody Person person) {
+        try {
+            iPerson.savePerson(person);
+            return person.getId();
+        }catch(CustomException e){
+            throw new CustomException("Exception while Save Person "+ e.getMessage());
+        }
+    }
+
     @GetMapping("/persons")
     private List<Person> getAllPersons() {
         try {
@@ -27,8 +37,8 @@ public class PersonController {
         }
     }
 
-    @PutMapping("/persons/{id}")
-    private Person getPerson(@PathVariable("id") int id, @RequestBody Person person) {
+    @PutMapping("/updatePersonDetails/{id}")
+    private Person updatePerson(@PathVariable("id") int id, @RequestBody Person person) {
         try{
             person.setId(id);
             return iPerson.updatePerson(person);}
@@ -43,16 +53,6 @@ public class PersonController {
             iPerson.delete(id);
         }catch(CustomException e){
             throw new CustomException("Exception while Delete Person "+id+" "+e.getMessage());
-        }
-    }
-
-    @PostMapping("/persons")
-    private int savePerson(@RequestBody Person person) {
-        try {
-            iPerson.savePerson(person);
-            return person.getId();
-        }catch(CustomException e){
-            throw new CustomException("Exception while Save Person "+ e.getMessage());
         }
     }
 
